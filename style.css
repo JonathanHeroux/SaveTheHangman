@@ -1,0 +1,286 @@
+
+
+/*Haut de page*/
+
+.buttons{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  padding: 0.5rem;
+  background-color: #77b8b8;
+}
+
+#frButton{
+  width: 5%;
+  height: auto;
+  padding: 15px;
+  border: 1px solid #9a9a9a;
+  border-radius: 5px;
+  box-shadow: 1px 1px 5px black;
+  background-color:#333;
+  color: white;
+  font-size: large;
+}
+
+#frButton:hover{
+  box-shadow: 4px 4px 4px black;
+  cursor: pointer;
+}
+
+#enButton:hover{
+  box-shadow: 4px 4px 4px black;
+  cursor: pointer;
+}
+
+#enButton{
+  width: 5%;
+  height: auto;
+  padding: 15px;
+  border: 1px solid #9a9a9a;
+  border-radius: 5px;
+  box-shadow: 1px 1px 5px black;
+  background-color:#333;
+  color: white;
+  font-size: large;
+}
+header {
+  font-size: 1.5rem;
+  padding: 2rem;
+  background-color: #333;
+  color: white;
+}
+/* Milieu de page */
+body {
+  margin: 0;
+  font-family: sans-serif;
+  background-color: #333;
+  text-align: center;
+  
+}
+
+
+/* test */
+.hanged,
+.hero {
+  outline: 2px dashed red;
+  
+}
+
+
+.gameZone{
+  position: relative;
+  width: 100vw;
+  aspect-ratio: 16/9;
+  
+  margin: auto;
+  box-sizing: border-box;
+  overflow: hidden;
+  
+  border: 3px solid #666;
+  box-shadow: 1px 1px 30px rgba(0, 0, 0, 0.6);
+}
+
+.backgroundImage {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  aspect-ratio: 16/9;
+  object-fit: cover; /* remplissage sans déformation */
+  user-select: none;
+  pointer-events: none;
+}
+
+
+/* Positionnement du pendu*/
+.hanged img {
+  position: absolute;
+  user-select: none; 
+  
+}
+
+.hanged {
+  position: absolute;
+  width: 40%;
+  height: 60%;
+  top: 30%;
+  left: 10%;
+  /* background-color: rgba(255, 255, 40, 0.9);  */
+
+}
+
+.hanger{
+  /* position: absolute; */
+  width: 70%;
+  height: auto;
+  top: 11%;
+  left: 35%;
+  filter: drop-shadow(0 0 30px white);
+}
+.rope{
+  width: 10%;
+  height: auto;
+  top: 21.5%;
+  left: 61%;
+}
+
+.barrel{
+  width: 20%;
+  top: 58%;
+  left: 56%;
+  
+}
+.headHanged {
+  width: 7%;
+  top: 27%;
+  left: 63.7%;
+}
+
+.bodyHanged {
+  width: 32%;
+  top: 28%;
+  left: 51%;
+}
+
+.rightHandHanged {
+  width: 18%;
+  top: 28%;
+  left: 58%;
+  
+}
+
+.leftHandHanged {
+  width: 18%;
+  top: 27.5%;
+  left: 56%;
+  
+}
+
+.rightLegHanged {
+ width: 30%;
+ top: 37%;
+ left: 50.5%;
+}
+
+.leftLegHanged {
+  width: 30%;
+ top: 37%;
+ left: 49%;
+}
+
+/* Positionnement des parties du héros, couteau*/
+
+.floorHero{
+  
+  width: 10%;
+  top: 10%;
+  right: 10%;
+}
+
+
+.hero{
+  position: absolute;
+  width: 30%;
+  height: 40%;
+  top: 50%;
+  left: 55%;
+  
+}
+.hero img{
+  position: absolute;
+  user-select: none;
+  filter: drop-shadow(0 0 10px white);
+}
+
+.headHero{
+  width: 30%;
+  top: 35%;
+  right: 52%;
+
+}
+
+.bodyHero{
+  width: 45%;
+  top: 35%;
+  right: 46%;
+  
+}
+.rightForearm{
+  width: 20%;
+  top: 50%;
+  right: 63.5%;
+}
+
+.rightHandHero{
+  width: 17%;
+  top: 46%;
+  right: 51.5%;
+}
+.rightLegHero{
+  width: 23%;
+  top:68.5%;
+  right: 47.5%;
+  
+}
+
+.leftLegHero{
+  width: 13%;
+  top: 67%;
+  right: 63%;
+}
+
+.knife{
+  position: absolute;
+  width: 2%;
+  top: 67.5%;
+  left: 68%;
+  z-index: 10;
+  filter: drop-shadow(0 0 2px darkred);
+}
+
+/* bas de page */
+.zoneText{
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 100%;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  padding: 2rem;
+  height: auto;
+  background-color: #77b8b8;
+
+}
+
+#boxLetter{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  justify-content: center;
+}
+
+.letterBtn{
+  width: 8%;
+  height: auto;
+  padding: 15px;
+  border: 1px solid #9a9a9a;
+  border-radius: 5px;
+  box-shadow: 1px 1px 5px black;
+  background-color:#333;
+  color: white;
+  font-size: large;
+}
+
+.letterBtn:hover{
+  box-shadow: 4px 4px 4px black;
+  cursor: pointer;
+}
+
+#winLose{
+  font-size: 30px;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-style: italic;
+  text-shadow: 1px 0px 1px black;
+  color: #333;
+}
