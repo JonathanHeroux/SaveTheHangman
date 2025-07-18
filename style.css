@@ -8,8 +8,8 @@
   align-items: center;
   gap: 2rem;
   padding: 0.5rem;
-  /* background-color: #77b8b8; */
   background-color: rgb(92, 78, 78);
+  
 }
 
 #frButton{
@@ -21,8 +21,9 @@
   border-radius: 5px;
   box-shadow: 1px 1px 5px black;
   background-color:#333;
-  color: white;
+  color: rgb(227, 175, 161);
   font-size: large;
+  animation: headerAnimation 1.4s ease-in forwards;
 }
 
 #frButton:hover{
@@ -43,14 +44,18 @@
   border-radius: 5px;
   box-shadow: 1px 1px 5px black;
   background-color:#333;
-  color: white;
+  color: rgb(227, 175, 161);
   font-size: large;
+  animation: navButtonAnimation 1.4s ease-in forwards;
 }
 header {
   font-size: 1.5rem;
   padding: 2rem;
   background-color: #333;
-  color: white;
+  color: rgb(227, 175, 161);
+  text-shadow: 2px 2px 5px black;
+
+  animation: headerAnimation 1.4s ease-in forwards;
 }
 /* Milieu de page */
 body {
@@ -86,6 +91,8 @@ body {
   
   border: 3px solid #666;
   box-shadow: 1px 1px 30px rgba(0, 0, 0, 0.6);
+
+  animation: gameZoneAnimation 4s ease-in;
 }
 
 .backgroundImage {
@@ -104,23 +111,48 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 3;
   bottom: 5%;
   width: 100%;
-  background-color:rgba(0, 0, 0, 0.5) 
+  background-color:transparent;
+  
 }
 
-#start{
+#startGame{
   color: rgb(150, 148, 148);
   font-size: 2vw;
   border: 1px solid #999;
   padding: 1%;
   box-shadow: 0px 0px 30px #414141;
   
+}
+
+#startGame{
+  animation: pulseStart 4s ease-in-out infinite;
   
 }
-#start:hover{
+#startGame:hover{
   cursor: pointer;
+}
+
+#restartGame{
+  color: rgb(150, 148, 148);
+  font-size: 2vw;
+  border: 1px solid #999;
+  padding: 1%;
+  box-shadow: 0px 0px 30px #414141;
+  opacity: 0.6;
+  cursor: pointer;
+  
+}
+
+#restartGame:hover{
+  color: rgb(227, 175, 161);  
+  box-shadow: 0px 0px 10px rgb(227, 175, 161);
+}
+#restartGame:active{
+  /* color: white; */
+  box-shadow: 0 0 10px white;
+  opacity: 0.8;
 }
 
 /* Positionnement du pendu*/
@@ -266,7 +298,7 @@ body {
   top: 68.5%;
   left: 65.2%;
   z-index: 10;
-  filter: drop-shadow(0 0 2px darkred);
+  filter: drop-shadow(0 0 2px rgb(227, 175, 161));
 }
 
 /* bas de page */
@@ -281,11 +313,42 @@ body {
   height: auto;
   /* background-color: #77b8b8; */
   background-color: rgb(92, 78, 78);
+  
 
 }
 
+#boxText:focus{
+  outline: none;
+  /* border-color: rgb(239, 205, 196); */
+  box-shadow: 0px 0px 5px black;
+  border: 2px solid rgba(245, 193, 179, 0.4);
+
+  
+}
+#hideWord{
+  font-size: 30px;
+  font-weight: bold;
+  color: rgb(227, 175, 161);
+  text-shadow: 1px 2px 5px black;
+  animation: zoneTextAnimation 1.4s ease-in
+}
 #boxText{
+  border-radius: 6px;
+  width: 300px;
+  height: 30px;
+  text-align: center;
+  background-color: #333;
+  color: white;
   font-size: large;
+  box-shadow: 5px 5px 2px black;
+  border: 2px solid #333;
+  animation: zoneTextAnimation 1.4s ease-in
+}
+#boxText::placeholder{
+  font-size: 1rem;
+  font-size: large;
+  color: rgb(227, 175, 161);
+  
 }
 
 #boxLetter{
@@ -293,6 +356,25 @@ body {
   flex-wrap: wrap;
   gap: 5px;
   justify-content: center;
+  animation: zoneTextAnimation 1.4s ease-in
+}
+
+.submitButton{
+  border-radius: 6px;
+  width: 100px;
+  height: 35px;
+  padding: 5px;
+  margin: auto;
+  font-size: larger;
+  text-align: center;
+  background-color: #333;
+  color: rgb(227, 175, 161);
+  box-shadow: 2px 2px 2px black;
+  animation: zoneTextAnimation 1.4s ease-in
+}
+
+.submitButton:hover{
+  box-shadow: 4px 4px 4px black;
 }
 
 .letterBtn{
@@ -305,7 +387,7 @@ body {
   background-color:#333;
   color: white;
   font-size: large;
-  
+  animation: zoneTextAnimation 1.4s ease-in
 }
 
 .letterBtn:hover{
@@ -317,7 +399,75 @@ body {
   font-size: 5vw;
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   font-style: italic;
-  text-shadow: 1px 0px 1px black;
-  color: #333;
-  
+  text-shadow: 2px 2px 2px black;
+  color: rgb(227, 175, 161);
+  animation: zoneTextAnimation 1.4s ease-in
 }
+
+/* Animation */
+
+@keyframes headerAnimation{
+  from{
+    transform: translateY(-30px);
+    transform: translateX(-30px);
+    opacity: 0;
+  }
+  to{
+    transform: translateY(0);
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes navButtonAnimation{
+  from{
+    transform: translateY(30px);
+    transform: translateX(30px);
+    opacity: 0;
+  }
+  to{
+    transform: translateY(0);
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes pulseStart {
+  0%{
+    transform: scale(1);
+    opacity: 0.6;
+  }
+  50%{
+    transform: scale(1.03);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 0.6;
+  }
+}
+
+@keyframes zoneTextAnimation{
+  from{
+    transform: translateY(30px);
+    opacity: 0;
+  }
+  to{
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes gameZoneAnimation {
+  0%{
+    opacity: 0;
+  }
+  50%{
+    opacity: 0.5;
+  }
+  100%{
+    opacity: 1;
+  }
+}
+
+

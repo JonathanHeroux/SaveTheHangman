@@ -1,8 +1,10 @@
 
-
-
 let secretWord = "";
 let language = "fr";
+let gameStarted = false;
+let startBtn = document.querySelector("#startGame");
+let resetBtn = document.querySelector("#restartGame");
+// let gameStarted = localStorage.getItem("gameStarted") === "true";
 const urlFr = "./data/mots_francais.json"
 
 async function getFrenchWords(){
@@ -52,7 +54,7 @@ async function getEnglishWords(){
         for (let i=0; i < getWords.length; i++){
             const filtered = getWords[i];
 
-            if(filtered.length>=4 && filtered.length<=15 && /^[a-zA-ZéèîïëàâäéèêëîïôöùûüçÀÂÄÉÈÊËÎÏÔÖÙÛÜÇ]+$/.test(filtered)){
+            if(filtered.length>=5 && filtered.length<=10 && /^[a-zA-ZéèîïëàâäéèêëîïôöùûüçÀÂÄÉÈÊËÎÏÔÖÙÛÜÇ]+$/.test(filtered)){
                 wordsList.push(filtered);
             }
         }
@@ -63,21 +65,37 @@ async function getEnglishWords(){
             for ( let i=0; i < randomWord.length; i++){
                 hiddenWord += "_ ";
         }
-        document.getElementById("hideWord").textContent = hiddenWord; // hide the word
-        // document.getElementById("hideWord").textContent = secretWord; //show the word
+        // document.getElementById("hideWord").textContent = hiddenWord; // hide the word
+        document.getElementById("hideWord").textContent = secretWord; //show the word
     }
 }
 
 document.getElementById("frButton").addEventListener("click", getFrenchWords);
 document.getElementById("enButton").addEventListener("click", getEnglishWords);
-document.getElementById("start").addEventListener("click", ()=>{
+document.getElementById("startGame").addEventListener("click", ()=>{
+    gameStarted = true;
+    document.getElementById("restartGame").style.display="inline-block";
+    document.getElementById("startGame").style.display="none";
     console.log("Texte du bouton start:", language);
+    
     if(language === "en"){
         getEnglishWords();
+        
     }else{
         getFrenchWords();
+        
     }
-})
+});
+document.getElementById("restartGame").addEventListener("click", ()=>{
+        
+    if(language === "en"){
+        getEnglishWords();
+        
+    }else{
+        getFrenchWords();
+        
+    }
+});
 
 const letterBox = document.querySelector("#boxLetter");
 const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -95,33 +113,26 @@ let rope = document.querySelector(".rope");
 let barrel = document.querySelector(".barrel");
 let hanged = document.querySelector(".hanged");
 
-function heroAnimation(){
-    rightHandHero.style.transition = "transform 0.3s ease";
-    rightHandHero.style.transform = "rotate(-45deg)";
-    setTimeout(() =>{
-        rightHandHero.style.transform = "rotate(0deg)";
-    }), 300;
-}
-
 let translation = {
     fr: {
         header: `Bienvenue sur <br>"Sauverez-vous le pendu?"`,
         winLose: "Bonne chance!",
         hideWord: "Mot Secret",
-        boxText: "Vous avez une idée du mot secret ? Écrivez le mot ici!",
+        boxText: "Écrivez le mot ici!",
         frButton: "Français",
         enButton: "Anglais",
-        start: "Commencez le jeu"
-
+        start: "Commencez le jeu",
+        restart:"Recommencer"
 },
     en: {
         header: `Welcome to <br>"Will you save the hangman?"`,
         winLose: "Good luck!",
         hideWord: "Secret Word",
-        boxText: "Got an idea for the secret word? Write it down here!",
+        boxText: "Write it down here!",
         frButton: "French",
         enButton: "English",
-        start: "Start the game"
+        start: "Start the game",
+        restart: "Restart"
         }
 };
 
@@ -130,16 +141,32 @@ function switchLanguage(language){
     document.querySelector("#frButton").textContent = translation[language].frButton;
     document.querySelector("#enButton").textContent = translation[language].enButton;
     document.querySelector("#winLose").textContent = translation[language].winLose;
-    document.querySelector("#boxText").textContent = translation[language].boxText;
-    document.querySelector("#start").textContent = translation[language].start;
+    document.querySelector("#boxText").placeholder = translation[language].boxText;
+    document.querySelector("#startGame").textContent = translation[language].start;
+    document.querySelector("#restartGame").textContent = translation[language].restart;
 }
+
+
 
 document.querySelector("#frButton").addEventListener("click", ()=>{
     switchLanguage("fr")
     language = "fr";
+    document.getElementById("restartGame").style.display="none";
+    document.getElementById("startGame").style.display="inline-block";
 });
 document.querySelector("#enButton").addEventListener("click", ()=>{
     switchLanguage("en")
     language = "en";
+    document.getElementById("restartGame").style.display="none";
+    document.getElementById("startGame").style.display="inline-block";
 });
 
+
+
+function heroAnimation(){
+    rightHandHero.style.transition = "transform 0.3s ease";
+    rightHandHero.style.transform = "rotate(-45deg)";
+    setTimeout(() =>{
+        rightHandHero.style.transform = "rotate(0deg)";
+}, 300);
+}
