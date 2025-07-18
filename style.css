@@ -8,11 +8,13 @@
   align-items: center;
   gap: 2rem;
   padding: 0.5rem;
-  background-color: #77b8b8;
+  /* background-color: #77b8b8; */
+  background-color: rgb(92, 78, 78);
 }
 
 #frButton{
-  width: 5%;
+
+  width: 100px;
   height: auto;
   padding: 15px;
   border: 1px solid #9a9a9a;
@@ -34,7 +36,7 @@
 }
 
 #enButton{
-  width: 5%;
+  width: 100px;
   height: auto;
   padding: 15px;
   border: 1px solid #9a9a9a;
@@ -63,14 +65,19 @@ body {
 /* test */
 .hanged,
 .hero {
-  outline: 2px dashed red;
+  /* outline: 2px dashed red; */
   
 }
+
+/* * {
+  outline: 1px solid red;
+} */
 
 
 .gameZone{
   position: relative;
-  width: 100vw;
+  width: 100%;
+  max-width: 100vw;
   aspect-ratio: 16/9;
   
   margin: auto;
@@ -92,6 +99,29 @@ body {
   pointer-events: none;
 }
 
+.zoneStart{
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 3;
+  bottom: 5%;
+  width: 100%;
+  background-color:rgba(0, 0, 0, 0.5) 
+}
+
+#start{
+  color: rgb(150, 148, 148);
+  font-size: 2vw;
+  border: 1px solid #999;
+  padding: 1%;
+  box-shadow: 0px 0px 30px #414141;
+  
+  
+}
+#start:hover{
+  cursor: pointer;
+}
 
 /* Positionnement du pendu*/
 .hanged img {
@@ -184,7 +214,7 @@ body {
   width: 30%;
   height: 40%;
   top: 50%;
-  left: 55%;
+  left: 53%;
   
 }
 .hero img{
@@ -206,16 +236,16 @@ body {
   right: 46%;
   
 }
-.rightForearm{
+.leftHandHero{
   width: 20%;
   top: 50%;
   right: 63.5%;
 }
 
 .rightHandHero{
-  width: 17%;
-  top: 46%;
-  right: 51.5%;
+  width: 14%;
+  top: 48%;
+  right: 54%;
 }
 .rightLegHero{
   width: 23%;
@@ -233,8 +263,8 @@ body {
 .knife{
   position: absolute;
   width: 2%;
-  top: 67.5%;
-  left: 68%;
+  top: 68.5%;
+  left: 65.2%;
   z-index: 10;
   filter: drop-shadow(0 0 2px darkred);
 }
@@ -249,8 +279,13 @@ body {
   gap: 2rem;
   padding: 2rem;
   height: auto;
-  background-color: #77b8b8;
+  /* background-color: #77b8b8; */
+  background-color: rgb(92, 78, 78);
 
+}
+
+#boxText{
+  font-size: large;
 }
 
 #boxLetter{
@@ -261,15 +296,16 @@ body {
 }
 
 .letterBtn{
-  width: 8%;
+  width: 15%;
   height: auto;
-  padding: 15px;
+  padding: 10px;
   border: 1px solid #9a9a9a;
   border-radius: 5px;
   box-shadow: 1px 1px 5px black;
   background-color:#333;
   color: white;
   font-size: large;
+  
 }
 
 .letterBtn:hover{
@@ -278,9 +314,10 @@ body {
 }
 
 #winLose{
-  font-size: 30px;
+  font-size: 5vw;
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   font-style: italic;
   text-shadow: 1px 0px 1px black;
   color: #333;
+  
 }
