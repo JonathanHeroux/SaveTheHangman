@@ -4,9 +4,27 @@ header {
   font-size: 1.5rem;
   padding: 2rem;
   background-color: #333;
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
   color: rgb(227, 175, 161);
   text-shadow: 2px 2px 5px black;
+  box-sizing: border-box;
+  
   animation: rightToLeftAnimation 1.4s ease-in forwards;
+  
+}
+body {
+  max-width: 1080px;
+  margin: 0 auto;
+  font-family: sans-serif;
+  background-color: rgb(92, 78, 78);
+  text-align: center;
+  position: relative;
+  
 }
 
 .buttons{
@@ -54,13 +72,7 @@ header {
   animation: leftToRightAnimation 1.4s ease-in forwards;
 }
 
-body {
-  margin: 0;
-  font-family: sans-serif;
-  background-color: #333;
-  text-align: center;
-  
-}
+
 /* Milieu de page */
 
 .hanged,
