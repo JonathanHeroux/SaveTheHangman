@@ -376,6 +376,15 @@ body {
   cursor: pointer;
 }
 
+.letterBtn.usedLetter {
+  background-color:rgb(92, 78, 78);
+  opacity: 0.6;
+  border: 1px solid #000000;
+  transform: scale(0.95);
+  box-shadow: 1px 1px 5px black;
+  
+}
+
 #winLose{
   font-size: clamp(1rem, 2vw, 2rem);
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;

@@ -108,6 +108,10 @@ function resetElements(){
     guessedLetter = [];
     triedWords.length = 0;
     input.style.borderColor= "";
+    document.querySelectorAll(".letterBtn").forEach(btn =>{
+        btn.disabled = false;
+        btn.classList.remove("usedLetter");
+    });
     enableAllLetters();
     
 }
@@ -138,7 +142,11 @@ function disableAllLetters() {
     document.querySelectorAll(".letterBtn").forEach(btn => btn.disabled = true);
 }
 function enableAllLetters() {
-    document.querySelectorAll(".letterBtn").forEach(btn => btn.disabled = false);
+    document.querySelectorAll(".letterBtn").forEach(btn =>{
+        if (!btn.classList.contains("usedLetter")) {
+            btn.disabled = false;
+        }
+    });
 }
 
 function revealSecretWord(){
@@ -160,11 +168,16 @@ function getClick(clickedLetter,button){
     if (animationInProgress){
         return;
     }
+    if (button.disabled){
+        return;
+    }
+
     animationInProgress=true;
     disableAllLetters();
 
     guessedLetter.push(clickedLetter);
     button.disabled = true;
+    button.classList.add("usedLetter");
     
     let found = false;
     for (let i = 0; i < secretWord.length; i++){
@@ -271,10 +284,9 @@ let translation = {
         header: `Bienvenue sur <br>"Sauverez-vous le pendu?"`,
         winLose: "Bonne chance!",
         hideWord: "Mot secret",
-        boxText: "Écrivez le mot ici!",
-        frButton: "Français",
-        enButton: "Anglais",
-        start: "Commencez le jeu",
+        boxText: "Devinez le mot ici !",
+        
+        start: "Commencer le jeu",
         restart:"Recommencer",
         submitButton:"Valider"
 },
@@ -282,9 +294,8 @@ let translation = {
         header: `Welcome to <br>"Will you save the hangman?"`,
         winLose: "Good luck!",
         hideWord: "Secret Word",
-        boxText: "Write it down here!",
-        frButton: "French",
-        enButton: "English",
+        boxText: "Guess the word here !",
+        
         start: "Start the game",
         restart: "Restart",
         submitButton: "Submit"
@@ -293,8 +304,7 @@ let translation = {
 
 function switchLanguage(language){
     document.querySelector("header").innerHTML = translation[language].header;
-    document.querySelector("#frButton").textContent = translation[language].frButton;
-    document.querySelector("#enButton").textContent = translation[language].enButton;
+    
     document.querySelector("#winLose").textContent = translation[language].winLose;
     document.querySelector("#boxText").placeholder = translation[language].boxText;
     document.querySelector("#startGame").textContent = translation[language].start;
@@ -306,18 +316,28 @@ function switchLanguage(language){
 document.querySelector("#frButton").addEventListener("click", ()=>{
     switchLanguage("fr")
     language = "fr";
+    gameOver = true;
     document.getElementById("restartGame").style.display="none";
     document.getElementById("startGame").style.display="inline-block";
     document.getElementById("hideWord").textContent = translation.fr.hideWord;
-    gameOver = true;
+    document.querySelectorAll(".letterBtn").forEach(btn => {
+        btn.disabled = false;
+        btn.classList.remove("usedLetter");
+    });
+    
+    
 });
 document.querySelector("#enButton").addEventListener("click", ()=>{
     switchLanguage("en")
     language = "en";
+    gameOver = true;
     document.getElementById("restartGame").style.display="none";
     document.getElementById("startGame").style.display="inline-block";
     document.getElementById("hideWord").textContent = translation.en.hideWord;
-    gameOver = true;
+    document.querySelectorAll(".letterBtn").forEach(btn => {
+        btn.disabled = false;
+        btn.classList.remove("usedLetter");
+    });
 });
 
 function playThrowAnimation(target){
@@ -378,3 +398,4 @@ function animatedRopeBreak(){
     rope.style.top = currentTop + "%";
     rope.classList.add("breakedRope");
 }
+
