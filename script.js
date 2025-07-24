@@ -3,11 +3,9 @@ let secretWord = "";
 let language = "fr";
 let startBtn = document.querySelector("#startGame");
 let resetBtn = document.querySelector("#restartGame");
-let rightHandHero = document.querySelector(".rightHandHero");
 let knife = document.querySelector(".knife");
 let rope = document.querySelector(".rope");
 let barrel = document.querySelector(".barrel");
-let hanged = document.querySelector(".hanged");
 let revealedLetters = [];
 let guessedLetter=[];
 let chanceLeft = 7;
@@ -17,6 +15,7 @@ let gameOver = false;
 let animationInProgress = false;
 
 knife.addEventListener("animationend", (e) => {
+    animationInProgress=false;
   if (e.animationName === "knifeToBarrel") {
     onWrongAnswer();
   }else if(e.animationName === "knifeToRope"){
@@ -37,23 +36,23 @@ async function getFrenchWords(){
         method:"get"
     });
 
-    if(!request.ok){
+    if (!request.ok){
         alert("Une erreur est survenu.")
     }else{
         let getWords = await request.json();
         let wordsList = [];
 
-        for (let i=0; i < getWords.length; i++){
+        for (let i = 0; i < getWords.length; i++){
             const filtered = getWords[i];
 
-            if(filtered.length>=4 && filtered.length<=12 && /^[a-zA-ZéèîïëàâäéèêëîïôöùûüçÀÂÄÉÈÊËÎÏÔÖÙÛÜÇ]+$/.test(filtered)){
+            if (filtered.length >= 4 && filtered.length <= 12 && /^[a-zA-ZéèîïëàâäéèêëîïôöùûüçÀÂÄÉÈÊËÎÏÔÖÙÛÜÇ]+$/.test(filtered)){
                 wordsList.push(filtered);
             }
         }
         const randomWord = wordsList[Math.floor(Math.random()* wordsList.length)];
         secretWord = randomWord;
         revealedLetters = [];
-            for ( let i=0; i < randomWord.length; i++){
+            for ( let i = 0; i < randomWord.length; i++){
                 revealedLetters.push("_");
         }
         document.getElementById("hideWord").textContent = revealedLetters.join(" "); //hide the word for admin tools
@@ -69,17 +68,17 @@ async function getEnglishWords(){
         method:"get"
     });
 
-    if(!request.ok){
+    if (!request.ok){
         alert("Une erreur est survenu.")
-    }else{
+    } else {
         let rawText = await request.text();
         let getWords = rawText.split('\n').map(word => word.trim());
         let wordsList = [];
 
-        for (let i=0; i < getWords.length; i++){
+        for (let i = 0; i < getWords.length; i++){
             const filtered = getWords[i];
 
-            if(filtered.length>=4 && filtered.length<=12 && /^[a-zA-ZéèîïëàâäéèêëîïôöùûüçÀÂÄÉÈÊËÎÏÔÖÙÛÜÇ]+$/.test(filtered)){
+            if (filtered.length >= 4 && filtered.length <= 12 && /^[a-zA-ZéèîïëàâäéèêëîïôöùûüçÀÂÄÉÈÊËÎÏÔÖÙÛÜÇ]+$/.test(filtered)){
                 wordsList.push(filtered);
             }
         }
@@ -87,7 +86,7 @@ async function getEnglishWords(){
         const randomWord = wordsList[Math.floor(Math.random()* wordsList.length)];
         secretWord = randomWord;
         revealedLetters = [];
-            for ( let i=0; i < randomWord.length; i++){
+            for ( let i = 0; i < randomWord.length; i++){
                 revealedLetters.push("_");
         }
         document.getElementById("hideWord").textContent = revealedLetters.join(" "); // hide the word for admin
@@ -102,13 +101,13 @@ function resetElements(){
     rope.style.top = "21.5%";
     barrel.style.left = "54%";
     animationInProgress=false;
-    goodAnswerNumbers=0;
-    errorNumbers=0;
-    chanceLeft=7;
-    gameOver=false;
-    guessedLetter=[];
+    goodAnswerNumbers = 0;
+    errorNumbers = 0;
+    chanceLeft = 7;
+    gameOver = false;
+    guessedLetter = [];
     triedWords.length = 0;
-    input.style.borderColor="";
+    input.style.borderColor= "";
     enableAllLetters();
     
 }
@@ -117,16 +116,16 @@ document.getElementById("startGame").addEventListener("click", ()=>{
     document.getElementById("restartGame").style.display="inline-block";
     document.getElementById("startGame").style.display="none";
     
-    if(language === "en"){
+    if (language === "en"){
         getEnglishWords();
-    }else{
+    } else {
         getFrenchWords();
     }
 });
 document.getElementById("restartGame").addEventListener("click", async ()=>{
-    if(language === "en"){
+    if (language === "en"){
         await getEnglishWords();
-    }else{
+    } else {
         await getFrenchWords();
         
     }
@@ -143,15 +142,24 @@ function enableAllLetters() {
 }
 
 function revealSecretWord(){
-    for (let i=0; i< secretWord.length; i++){
+    for (let i = 0; i < secretWord.length; i++){
         revealedLetters[i] = secretWord[i];
     }
     document.getElementById("hideWord").textContent = revealedLetters.join(" ");
 }
 
+function removeAccents(str) {
+    return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+}
+
+
 function getClick(clickedLetter,button){
-    if(gameOver || guessedLetter.includes(clickedLetter) || chanceLeft <=0)return;
-    if (animationInProgress)return;
+    if (gameOver || guessedLetter.includes(clickedLetter) || chanceLeft <=0){
+        return;
+    }
+    if (animationInProgress){
+        return;
+    }
     animationInProgress=true;
     disableAllLetters();
 
@@ -159,33 +167,33 @@ function getClick(clickedLetter,button){
     button.disabled = true;
     
     let found = false;
-    for (let i=0; i<secretWord.length; i++){
-        if(secretWord[i].toUpperCase() === clickedLetter){
+    for (let i = 0; i < secretWord.length; i++){
+        if (removeAccents(secretWord[i].toUpperCase()) === clickedLetter){
             revealedLetters[i] = secretWord[i];
             found = true;
         }
     }
     document.getElementById("hideWord").textContent = revealedLetters.join(" ")
 
-    if(found){
+    if (found){
             playThrowAnimation(rope);
-        }else{
+        } else {
             chanceLeft--;
-                if(chanceLeft<=0){
+                if (chanceLeft<=0){
                     chanceLeft=0;
                     document.getElementById("winLose").textContent = language === "fr" ? "Le pendu est ... peut être sauverez-vous le prochain!" : "The hangman is ... maybe you will save the next one!";
                     gameOver=true;
                     revealSecretWord();
                     playThrowAnimation(barrel)
                     disableAllLetters();
-                }else{
+                } else {
                     document.getElementById("winLose").textContent = language ==="fr" ? "Ce n'est pas terminé, il vous reste "+chanceLeft+" chance(s)" : "This is not over, you have "+chanceLeft+" chance(s) left!";
                     playThrowAnimation(barrel); 
         }
     }
 }
 
-for(let i=0; i <alphabet.length; i++){
+for (let i = 0; i < alphabet.length; i++){
     const keysButton = document.createElement("button");
     keysButton.textContent = alphabet[i];
     keysButton.classList.add("letterBtn");
@@ -202,7 +210,9 @@ disableAllLetters();
 document.querySelector("#guessWord").addEventListener("submit", (e)=>{
     e.preventDefault();
     
-    if(animationInProgress || gameOver || chanceLeft <=0)return;
+    if (animationInProgress || gameOver || chanceLeft <=0){
+        return;
+    }
     
     animationInProgress=true;
     disableAllLetters();
@@ -214,50 +224,53 @@ document.querySelector("#guessWord").addEventListener("submit", (e)=>{
     input.focus();
     input.style.borderColor="";
 
-    if(!/^[a-zA-ZéèîïëàâäéèêëîïôöùûüçÀÂÄÉÈÊËÎÏÔÖÙÛÜÇ]+$/.test(guess) || guess.length<4){
+    if (!/^[a-zA-ZéèîïëàâäéèêëîïôöùûüçÀÂÄÉÈÊËÎÏÔÖÙÛÜÇ]+$/.test(guess) || guess.length<4){
         input.style.borderColor="darkred";
+        animationInProgress=false;
+        enableAllLetters();
         return;
     }
 
-    if(triedWords.includes(guess)){
+    if (triedWords.includes(guess)){
         document.getElementById("winLose").textContent=language === "fr" ? "Oups, vous avez déjà essayé ce mot!" : "Oupsy, you've already tried this word!";
+        animationInProgress = false;
+        enableAllLetters();
         return;
-    }else{
+    } else {
         triedWords.push(guess);
     }
 
-    if(guess === secretWord){
-         for (let i=0; i<secretWord.length; i++){
+    if (removeAccents(guess.toUpperCase()) === removeAccents(secretWord.toUpperCase())){
+         for (let i = 0; i < secretWord.length; i++){
             revealedLetters[i] = secretWord[i];
     }
         
         document.getElementById("hideWord").textContent = revealedLetters.join(" ")
         playThrowAnimation(rope);
-    }else{
-        if(chanceLeft >0)
+        gameOver = true;
+    } else {
+        if (chanceLeft > 0){
         chanceLeft--;
         document.getElementById("winLose").textContent = language ==="fr" ? "Ce n'est pas terminé, il vous reste "+chanceLeft+" chance(s)" : "This is not over, you have "+chanceLeft+" chance(s) left!";
-        onWrongAnswer();
-        playThrowAnimation(barrel);
         
-        if(chanceLeft <=0){
+        playThrowAnimation(barrel);
+        }
+        if (chanceLeft <= 0){
             document.getElementById("winLose").textContent = language === "fr" ? "Le pendu est ... peut être sauverez-vous le prochain!" : "The hangman is ... maybe you will save the next one!";
-            gameOver=true;
+            gameOver = true;
             revealSecretWord();
-            chanceLeft=0;
-            onWrongAnswer();
+            chanceLeft = 0;
             playThrowAnimation(barrel);
             disableAllLetters();
         }
     }
-      
 });
 
 let translation = {
     fr: {
         header: `Bienvenue sur <br>"Sauverez-vous le pendu?"`,
         winLose: "Bonne chance!",
-        hideWord: "Mot Secret",
+        hideWord: "Mot secret",
         boxText: "Écrivez le mot ici!",
         frButton: "Français",
         enButton: "Anglais",
@@ -290,14 +303,13 @@ function switchLanguage(language){
     document.querySelector("#hideWord").textContent = translation[language].hideWord;
 }
 
-
-
 document.querySelector("#frButton").addEventListener("click", ()=>{
     switchLanguage("fr")
     language = "fr";
     document.getElementById("restartGame").style.display="none";
     document.getElementById("startGame").style.display="inline-block";
     document.getElementById("hideWord").textContent = translation.fr.hideWord;
+    gameOver = true;
 });
 document.querySelector("#enButton").addEventListener("click", ()=>{
     switchLanguage("en")
@@ -305,6 +317,7 @@ document.querySelector("#enButton").addEventListener("click", ()=>{
     document.getElementById("restartGame").style.display="none";
     document.getElementById("startGame").style.display="inline-block";
     document.getElementById("hideWord").textContent = translation.en.hideWord;
+    gameOver = true;
 });
 
 function playThrowAnimation(target){
@@ -319,9 +332,9 @@ function playThrowAnimation(target){
     void animatedKnife.offsetWidth;
 
     hand.classList.add("throw-hand");
-    if(target.classList.contains("rope")){
+    if (target.classList.contains("rope")){
     animatedKnife.classList.add("throwToRope");
-    }else if(target.classList.contains("barrel")){
+    } else if (target.classList.contains("barrel")){
     animatedKnife.classList.add("throwToBarrel");
     }
 
@@ -329,9 +342,9 @@ function playThrowAnimation(target){
         animatedKnife.style.opacity="1";
         animatedKnife.style.transform="none";
         animatedKnife.classList.remove("throwToRope","throwToBarrel");
-        animationInProgress=false;
-        if(!gameOver) enableAllLetters();
-    }, 1700);
+        animationInProgress = false;
+        if (!gameOver) enableAllLetters();
+    }, 1600);
 
 };
 
@@ -356,7 +369,7 @@ function onWrongAnswer(){
     errorNumbers++;
     let baseLeftPosition = 54;
     let barrelLeft = -0.63;
-    let newLeftPosition= baseLeftPosition + errorNumbers * barrelLeft;
+    let newLeftPosition = baseLeftPosition + errorNumbers * barrelLeft;
     barrel.style.left = newLeftPosition + "%";
 }
 

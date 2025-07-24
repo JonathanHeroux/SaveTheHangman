@@ -83,7 +83,7 @@ body {
 .gameZone{
   position: relative;
   width: 100%;
-  max-width: 1440px;
+  max-width: 1080px;
   aspect-ratio: 16/9;
   margin: auto;
   box-sizing: border-box;
@@ -144,7 +144,6 @@ body {
   box-shadow: 0px 0px 10px rgb(227, 175, 161);
 }
 #restartGame:active{
-  /* color: white; */
   box-shadow: 0 0 10px white;
   opacity: 0.8;
 }
@@ -169,7 +168,7 @@ body {
   height: auto;
   top: 11%;
   left: 35%;
-  filter: drop-shadow(0 0 30px white);
+  filter: drop-shadow(0 0 45px white);
 }
 .rope{
   width: 10%;
@@ -231,7 +230,7 @@ body {
 .hero img{
   position: absolute;
   user-select: none;
-  filter: drop-shadow(0 0 10px white);
+  filter: drop-shadow(0 0 18px white);
 }
 
 .headHero{
@@ -271,9 +270,9 @@ body {
 
 .knife{
   position: absolute;
-  width: 2%;
+  width: 3%;
   top: 68.5%;
-  left: 65.2%;
+  left: 64.5%;
   z-index: 10;
   filter: drop-shadow(0 0 2px rgb(227, 175, 161));
   
@@ -472,7 +471,7 @@ body {
 @keyframes knifeToRope {
   0% {
     top: 68.5%;
-    left: 65.2%;
+    left: 64.5%;
     transform: scaleX(-1) rotate(0deg);
     opacity: 1;
   }
@@ -488,7 +487,7 @@ body {
 }
 @keyframes knifeToBarrel{
   0% {top: 68.5%;
-    left: 65.2%;
+    left: 64.5%;
     transform: scaleX(-1) rotate(0deg);
     opacity: 1;
   }
