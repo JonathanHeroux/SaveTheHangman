@@ -16,7 +16,7 @@
         </nav>
         <div class="gameZone">
             <img src="images/Limbo.png" alt="background" class="backgroundImage">
-            <img src="images/knife_hero.png" class="knife">
+            <img src="images/knife_hero.png" class="knife" id="animatedKnife">
             <div class="zoneHanged">
                 <div class="hanged">
                     
@@ -31,7 +31,7 @@
                     <img src="images/Hangman-1.png" class="hanger">
                     
                 </div>
-                <!-- Github test-->
+                
                 
             </div>
             <div class="zoneHero">
@@ -39,24 +39,25 @@
                     <img src="images/head_hero.png" class="headHero">
                     <img src="images/body_hero.png" class="bodyHero">
                     <img src="images/left_hand_hero.png" class="leftHandHero">
-                    <img src="images/right_hand_hero.png" class="rightHandHero">
-                    
+                    <img src="images/right_hand_hero.png" class="rightHandHero" id="throwHand">
                     <img src="images/left_leg_hero.png" class="leftLegHero">
                     <img src="images/right_leg_hero.png" class="rightLegHero">
-                    <img src="images/hero_floor.png" class="floorHero">
                 </div>
             </div>
             <div class="zoneStart">
-                <div id="startGame" class="startButton">Commencer le jeu</div>
-                <div id="restartGame" class="restartButton" style="display: none;">Recommencer</div>
+                <div id="startGame">Commencer le jeu</div>
+                <div id="restartGame" style="display: none;">Recommencer</div>
             </div>
         </div>
         
         <div class="zoneText">
                 
                 <div id="hideWord">Mot secret</div>
+
+                <form id="guessWord">
                 <input id="boxText" placeholder="Écrivez le mot ici!"></input>
-                <button type="submit" class="submitButton">Valider</button>
+                <button type="submit" class="submitButton" >Valider</button>
+                </form>
                 <div id="boxLetter"></div>
                 <div id="winLose">Bonne Chance !</div>
             </div>
