@@ -394,6 +394,12 @@ body {
   animation: zoneTextAnimation 1.4s ease-in
 }
 
+.disabled {
+    pointer-events: none;
+    cursor: not-allowed;
+}
+
+
 /* Animation */
 
 @keyframes rightToLeftAnimation{

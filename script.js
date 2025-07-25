@@ -13,6 +13,7 @@ let goodAnswerNumbers=0;
 let errorNumbers = 0;
 let gameOver = false;
 let animationInProgress = false;
+document.querySelector(".submitButton").disabled = true;
 
 knife.addEventListener("animationend", (e) => {
     animationInProgress=false;
@@ -23,8 +24,6 @@ knife.addEventListener("animationend", (e) => {
     }
 
 });
-
-
 
 const triedWords =[];
 const urlFr = "./data/mots_francais.json"
@@ -108,6 +107,8 @@ function resetElements(){
     guessedLetter = [];
     triedWords.length = 0;
     input.style.borderColor= "";
+    document.querySelector(".submitButton").disabled = false;
+    document.querySelector(".submitButton").classList.remove("disabled");
     document.querySelectorAll(".letterBtn").forEach(btn =>{
         btn.disabled = false;
         btn.classList.remove("usedLetter");
@@ -222,7 +223,7 @@ disableAllLetters();
 
 document.querySelector("#guessWord").addEventListener("submit", (e)=>{
     e.preventDefault();
-    
+   
     if (animationInProgress || gameOver || chanceLeft <=0){
         return;
     }
