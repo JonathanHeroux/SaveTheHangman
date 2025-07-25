@@ -369,7 +369,6 @@ function playThrowAnimation(target){
 
 };
 
-
 function onGoodAnswer(){
     goodAnswerNumbers++;
     let baseTopPosition = 21.5;
